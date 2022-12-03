@@ -4,7 +4,7 @@ import Header from './components/Header'
 import Home from './components/Home'
 import Area from './components/AreaSearch'
 import Station from './components/StationSearch'
-import Location from './components/LocationSearch'
+import Location from './components/GetLocation'
 import NoMatch from './components/NoMatch'
 // import Footer from './Footer';
 
