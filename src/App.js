@@ -1,28 +1,28 @@
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import React from 'react';
-import Area from './components/Header'
-import Station from './components/Header'
-import Location from './components/Header'
-
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";// import Main from './Main';
+import Header from './components/Header'
+import Home from './components/Home'
+import Area from './components/AreaSearch'
+import Station from './components/StationSearch'
+import Location from './components/LocationSearch'
+import NoMatch from './components/NoMatch'
 // import Footer from './Footer';
 
 export default function App() {
   return (
     <>
-      
       <BrowserRouter>
         <div className="App">
-          <Link to="/">to top</Link>
-          <br />
-          <Link to="/company">to company</Link>
-          <br />
-          <Link to="/contact">to contact</Link>
-
+          <div>
+            <Header />
           <Routes>
-            <Route path="/" element={<Location />} />
-            <Route path="company" element={<Station />} />
-            <Route path="contact" element={<Area />} />
+            <Route path="/" element={<Home />}/> 
+            <Route path="/area" element={<Area />} />
+            <Route path="/station" element={<Station />} />
+            <Route path="location" element={<Location />} />
+            <Route path="/*" element={<NoMatch />} />
           </Routes>
+          </div>
         </div>
       </BrowserRouter>
     </>

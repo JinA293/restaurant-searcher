@@ -13,7 +13,7 @@ export default function DenseAppBar() {
           <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
           </IconButton>
           <Typography variant="h6" color="inherit" component="div">
-            Photos
+            Restaurant Searcher
           </Typography>
         </Toolbar>
       </AppBar>
