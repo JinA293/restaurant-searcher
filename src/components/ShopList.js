@@ -8,22 +8,30 @@ import { CardActionArea } from '@mui/material';
 
 export default function ShopList(props) {
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        // <h1>{props.shopName}</h1>
+        <Card>
             <Link to="/">
                 <CardActionArea>
                     <CardMedia
                         component="img"
-                        height="140"
-                        image="/static/images/cards/contemplative-reptile.jpg"
-                        alt="shop_logo_image"
+                        image={props.shop.photo.pc.s}
+                        alt="shopPhoto"
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            Lizard
+                            {props.shop.name}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000
-                            species, ranging across all continents except Antarctica
+                            {props.shop.catch}
+                        </Typography>
+                        <Typography variant="body3" color="text.secondary">
+                            {props.shop.open}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {props.shop.mobile_access}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                            {props.shop.budget.average}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

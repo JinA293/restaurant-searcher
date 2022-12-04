@@ -12,7 +12,7 @@ export default function Location() {
     const API_KEY = process.env.REACT_APP_GOURMET_API_KEY
     const [isAvailable, setAvailable] = useState(false);
     const [position, setPosition] = useState({ latitude: null, longitude: null });
-    const [shopList, setShopList] = useState();
+    let [shops, setShops] = useState();
 
     // useEffectが実行されているかどうかを判定するために用意しています
     const isFirstRef = useRef(true);
@@ -24,7 +24,7 @@ export default function Location() {
         isFirstRef.current = false;
         if ('geolocation' in navigator) {
             setAvailable(true);
-            console.log(process.env.REACT_APP_GOURMET_API_KEY)
+            // console.log(process.env.REACT_APP_GOURMET_API_KEY)
             getCurrentPosition();
             getShopList();
         }
@@ -41,10 +41,15 @@ export default function Location() {
     const getShopList = () => {
         axios
             .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + '&lat=34.67&lng=135.52&range=5&order=4&format=json')
-            .then(res=>{setShopList(res.data);
-                        console.log(res);
-                })
-            .catch(err=>{console.log(err);})
+            .then(res => {
+                console.log(res.data);
+                // let newShops = JSON.stringify(res.data.results.shop)
+                // newShops = JSON.parse(newShops)
+                setShops(res.data.results.shop);
+                shops = JSON.parse(JSON.stringify(res.data.results.shop))
+                console.log(shops);
+            })
+            .catch(err => { console.log(err); })
     }
 
     // useEffect実行前であれば、"Loading..."という呼び出しを表示させます
@@ -53,15 +58,17 @@ export default function Location() {
     return (
         <div>
             <h1>エリアから探す</h1>
-            <h3>地名から〇km</h3>
+            <h3>地名から--km</h3>
             <div className="getLocation">
                 {!isFirstRef && !isAvailable && <ErrorText />}
-                {isAvailable && (
-                    <div>
-                        <ShopList />
-                    </div>
-                )}
+                {isAvailable && shops &&(
+                    shops.map((shop) => 
+                        <ShopList shop = {shop} />
+                        // shop={shop}
+                    )
+                    )
+                }
             </div>
         </div>
-    );
-};
+    )
+}
