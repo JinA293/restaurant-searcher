@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import React, { useState, useEffect, useRef } from 'react';
 import axios from "axios"
 import ShopList from './ShopList'
+import SelectForm from './SelectForm'
 
 // ここで現在地と店舗の座標を取得したのちに取得範囲で絞り込んだ店舗のデータをpropsでShopListに渡す
 const ErrorText = () => (
@@ -12,6 +13,7 @@ export default function Location() {
     const API_KEY = process.env.REACT_APP_GOURMET_API_KEY
     const [isAvailable, setAvailable] = useState(false);
     const [position, setPosition] = useState({ latitude: null, longitude: null });
+    const [range, setRange] = useState('');
     let [shops, setShops] = useState();
 
     // useEffectが実行されているかどうかを判定するために用意しています
@@ -28,7 +30,7 @@ export default function Location() {
             getCurrentPosition();
             getShopList();
         }
-    }, [isAvailable]);
+    }, [isAvailable,range]);
 
     const getCurrentPosition = () => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -40,7 +42,7 @@ export default function Location() {
 
     const getShopList = () => {
         axios
-            .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + '&lat=34.67&lng=135.52&range=5&order=4&format=json')
+            .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + `&lat=34.67&lng=135.52&range=${range}&order=4&format=json`)
             .then(res => {
                 console.log(res.data);
                 // let newShops = JSON.stringify(res.data.results.shop)
@@ -58,13 +60,16 @@ export default function Location() {
     return (
         <div>
             <h1>エリアから探す</h1>
-            <h3>地名から--km</h3>
+            <div>
+            <h3>地名からの距離</h3>
+            <SelectForm setRange = {setRange} />
+            <h3>で検索する</h3>
+            </div>
             <div className="getLocation">
                 {!isFirstRef && !isAvailable && <ErrorText />}
                 {isAvailable && shops &&(
                     shops.map((shop) => 
                         <ShopList shop = {shop} />
-                        // shop={shop}
                     )
                     )
                 }
