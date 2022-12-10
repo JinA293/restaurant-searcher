@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from "axios"
 import ShopList from './ShopList'
 import SelectForm from './SelectForm'
+import "../App.css";
 
 // ここで現在地と店舗の座標を取得したのちに取得範囲で絞り込んだ店舗のデータをpropsでShopListに渡す
 const ErrorText = () => (
@@ -30,7 +31,7 @@ export default function Location() {
             getCurrentPosition();
             getShopList();
         }
-    }, [isAvailable,range]);
+    }, [isAvailable, range]);
 
     const getCurrentPosition = () => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -42,7 +43,7 @@ export default function Location() {
 
     const getShopList = () => {
         axios
-            .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + `&lat=34.67&lng=135.52&range=${range}&order=4&format=json`)
+            .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + `&lat=34.67&lng=135.52&range=${range}&order=4&count=100&format=json`)
             .then(res => {
                 console.log(res.data);
                 // let newShops = JSON.stringify(res.data.results.shop)
@@ -61,17 +62,19 @@ export default function Location() {
         <div>
             <h1>エリアから探す</h1>
             <div>
-            <h3>地名からの距離</h3>
-            <SelectForm setRange = {setRange} />
-            <h3>で検索する</h3>
+                <h3>地名からの距離</h3>
+                <SelectForm setRange={setRange} />
+                <h3>で検索する</h3>
             </div>
             <div className="getLocation">
                 {!isFirstRef && !isAvailable && <ErrorText />}
-                {isAvailable && shops &&(
-                    shops.map((shop) => 
-                        <ShopList shop = {shop} />
-                    )
-                    )
+                {isAvailable && shops && (
+                    <div className="shopList">
+                        {shops.map((shop) =>
+                            <ShopList shop={shop} />
+                        )}
+                    </div>
+                )
                 }
             </div>
         </div>

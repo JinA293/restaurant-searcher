@@ -11,9 +11,17 @@ import IconButton from '@mui/material/IconButton';
 
 export default function ShopList(props) {
     return (
-        // <h1>{props.shopName}</h1>
-        <Card sx={{ display: 'flex' }}>
-            <CardActionArea sx={{ display: 'flex', justifyContent: 'flex-start'}}>
+        <Card sx={{
+            display: 'flex',
+            width: '47%',
+            height: '220px',
+            border: '1px solid orange',
+            margin: '15px',
+        }}>
+            <CardActionArea sx={{
+                display: 'flex',
+                justifyContent: 'flex-start'
+            }}>
                 <CardMedia
                     sx={{
                         width: "200px",
