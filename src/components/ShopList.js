@@ -1,13 +1,12 @@
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
+
 
 export default function ShopList(props) {
     return (
@@ -32,7 +31,7 @@ export default function ShopList(props) {
                     alt="shopPhoto"
                 />
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Link to="/">
+                    <Link to={"/shopinfo/" + props.shop.id}>
                         <CardContent sx={{ flex: '1 0 auto' }}>
                             <Typography gutterBottom variant="h5" component="div">
                                 {props.shop.name}

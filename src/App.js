@@ -6,6 +6,8 @@ import Area from './components/AreaSearch'
 import Station from './components/StationSearch'
 import LocationSearch from './components/LocationSearch'
 import NoMatch from './components/NoMatch'
+import ShopInfo from "./components/ShopInfo";
+
 
 export default function App() {
   return (
@@ -20,6 +22,7 @@ export default function App() {
             <Route path="/area" element={<Area />} />
             <Route path="/station" element={<Station />} />
             <Route path="location" element={<LocationSearch />} />
+            <Route path="/shopinfo/:id" element={<ShopInfo />} />
             <Route path="/*" element={<NoMatch />} />
           </Routes>
           </div>
