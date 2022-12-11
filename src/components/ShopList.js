@@ -6,9 +6,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+
 
 
 export default function ShopList(props) {
+
     return (
         <Card sx={{
             display: 'flex',
@@ -17,21 +20,21 @@ export default function ShopList(props) {
             border: '1px solid orange',
             margin: '15px',
         }}>
-            <CardActionArea sx={{
-                display: 'flex',
-                justifyContent: 'flex-start'
-            }}>
-                <CardMedia
-                    sx={{
-                        width: "200px",
-                        padding: "10px"
-                    }}
-                    component="img"
-                    image={props.shop.photo.pc.l}
-                    alt="shopPhoto"
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Link to={"/shopinfo/" + props.shop.id}>
+            <Link to={"/shopinfo/" + props.shop.id}>
+                <CardActionArea sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-start'
+                }}>
+                    <CardMedia
+                        sx={{
+                            width: "200px",
+                            padding: "10px"
+                        }}
+                        component="img"
+                        image={props.shop.photo.pc.l}
+                        alt="shopPhoto"
+                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <CardContent sx={{ flex: '1 0 auto' }}>
                             <Typography gutterBottom variant="h5" component="div">
                                 {props.shop.name}
@@ -48,9 +51,9 @@ export default function ShopList(props) {
                                 デイナー予算：{props.shop.budget.average}
                             </Typography>
                         </CardContent>
-                    </Link>
-                </Box>
-            </CardActionArea>
+                    </Box>
+                </CardActionArea>
+            </Link>
         </Card>
     );
 }

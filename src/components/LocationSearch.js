@@ -15,7 +15,7 @@ export default function Location() {
     const [isAvailable, setAvailable] = useState(false);
     const [position, setPosition] = useState({ latitude: null, longitude: null });
     const [range, setRange] = useState('');
-    let [shops, setShops] = useState();
+    const [shops, setShops] = useState();
 
     // useEffectが実行されているかどうかを判定するために用意しています
     const isFirstRef = useRef(true);
@@ -27,7 +27,6 @@ export default function Location() {
         isFirstRef.current = false;
         if ('geolocation' in navigator) {
             setAvailable(true);
-            // console.log(process.env.REACT_APP_GOURMET_API_KEY)
             getCurrentPosition();
             getShopList();
         }
@@ -41,15 +40,12 @@ export default function Location() {
         });
     };
 
-    const getShopList = () => {
-        axios
+    async function getShopList () {
+        await axios
             .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + `&lat=34.67&lng=135.52&range=${range}&order=4&count=100&format=json`)
             .then(res => {
                 console.log(res.data);
-                // let newShops = JSON.stringify(res.data.results.shop)
-                // newShops = JSON.parse(newShops)
-                setShops(res.data.results.shop);
-                shops = JSON.parse(JSON.stringify(res.data.results.shop))
+                setShops(JSON.parse(JSON.stringify(res.data.results.shop)))
                 console.log(shops);
             })
             .catch(err => { console.log(err); })
@@ -57,7 +53,6 @@ export default function Location() {
 
     // useEffect実行前であれば、"Loading..."という呼び出しを表示させます
     if (isFirstRef.current) return <div className="App">Loading...</div>;
-
     return (
         <div>
             <h1>エリアから探す</h1>
