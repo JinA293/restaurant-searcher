@@ -6,7 +6,7 @@ import Area from './components/AreaSearch'
 import Station from './components/StationSearch'
 import LocationSearch from './components/LocationSearch'
 import NoMatch from './components/NoMatch'
-import ShopInfo from "./components/ShopInfo";
+import ShopInfo from './components/ShopInfo'
 
 
 export default function App() {
