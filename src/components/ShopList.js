@@ -6,7 +6,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
 
 
@@ -15,10 +14,12 @@ export default function ShopList(props) {
     return (
         <Card sx={{
             display: 'flex',
-            width: '47%',
-            height: '220px',
-            border: '1px solid orange',
+            alignItems: 'center',
+            width: '45%',
+            height: 'auto',
+            border: '3px solid orange',
             margin: '15px',
+            padding: '10px'
         }}>
             <Link to={"/shopinfo/" + props.shop.id}>
                 <CardActionArea sx={{
