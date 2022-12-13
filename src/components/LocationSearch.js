@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from "axios"
 import ShopList from './ShopList'
 import SelectForm from './SelectForm'
-import "../App.css";
+import Paging from './Paging';
 
 // ここで現在地と店舗の座標を取得したのちに取得範囲で絞り込んだ店舗のデータをpropsでShopListに渡す
 const ErrorText = () => (
@@ -16,6 +16,8 @@ export default function Location() {
     const [position, setPosition] = useState({ latitude: null, longitude: null });
     const [range, setRange] = useState('');
     const [shops, setShops] = useState();
+    const [page, setPage] = useState(1)
+    let renderedShops = []
 
     // useEffectが実行されているかどうかを判定するために用意しています
     const isFirstRef = useRef(true);
@@ -30,13 +32,12 @@ export default function Location() {
             getCurrentPosition();
             getShopList();
         }
-    }, [isAvailable, range]);
+    }, [isAvailable, range, page]);
 
     const getCurrentPosition = () => {
         navigator.geolocation.getCurrentPosition(position => {
             const { latitude, longitude } = position.coords;
             setPosition({ latitude, longitude });
-            console.log(latitude, longitude)
         });
     };
 
@@ -44,15 +45,15 @@ export default function Location() {
         await axios
             .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + `&lat=34.67&lng=135.52&range=${range}&order=4&count=100&format=json`)
             .then(res => {
-                console.log(res.data);
-                setShops(JSON.parse(JSON.stringify(res.data.results.shop)))
-                console.log(shops);
+                const startNum = page  * 10 - 10;
+                const endNum = startNum + 10;
+                setShops(JSON.parse(JSON.stringify(res.data.results.shop)).slice(startNum, endNum));
             })
             .catch(err => { console.log(err); })
     }
 
-    // useEffect実行前であれば、"Loading..."という呼び出しを表示させます
     if (isFirstRef.current) return <div className="App">Loading...</div>;
+    if (!shops) return null;
     return (
         <div>
             <h1>エリアから探す</h1>
@@ -63,15 +64,18 @@ export default function Location() {
             </div>
             <div className="getLocation">
                 {!isFirstRef && !isAvailable && <ErrorText />}
-                {isAvailable && shops && (
-                    <div style={{
-                        display: 'flex',
-                        flexWrap: 'wrap',
-                        justifyContent: 'spaceBetween'
-                    }}>
-                        {shops.map((shop) =>
-                            <ShopList shop={shop} />
-                        )}
+                {isAvailable && renderedShops && (
+                    <div>
+                        <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            justifyContent: 'spaceBetween'
+                        }}>
+                            {shops.map((shop) =>
+                                <ShopList shop={shop} />
+                            )}
+                        </div>
+                        <Paging page={page} setPage={setPage} />
                     </div>
                 )
                 }
