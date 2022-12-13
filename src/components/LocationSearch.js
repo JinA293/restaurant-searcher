@@ -4,6 +4,8 @@ import axios from "axios"
 import ShopList from './ShopList'
 import SelectForm from './SelectForm'
 import Paging from './Paging';
+import "../App.css";
+
 
 // ここで現在地と店舗の座標を取得したのちに取得範囲で絞り込んだ店舗のデータをpropsでShopListに渡す
 const ErrorText = () => (
@@ -57,7 +59,7 @@ export default function Location() {
     return (
         <div>
             <h1>エリアから探す</h1>
-            <div>
+            <div style={{display: 'flex'}}>
                 <h3>地名からの距離</h3>
                 <SelectForm setRange={setRange} />
                 <h3>で検索する</h3>

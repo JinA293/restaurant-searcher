@@ -1,21 +1,18 @@
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+import "../App.css";
+
 
 export default function DenseAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <Link to="/">
+      <AppBar position="static" color='warning' sx={{ height: '60px'}}>
+        <Toolbar>
+          <Link to="/" style={{ color: '#000', fontSize: '30px', fontWeight: 'bold' }}>
             Restaurant Searcher
           </Link>
         </Toolbar>
       </AppBar>
-    </Box>
   );
 }
