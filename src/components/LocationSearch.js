@@ -40,7 +40,7 @@ export default function Location() {
         });
     };
 
-    async function getShopList () {
+    async function getShopList() {
         await axios
             .get('https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + API_KEY + `&lat=34.67&lng=135.52&range=${range}&order=4&count=100&format=json`)
             .then(res => {
@@ -64,7 +64,11 @@ export default function Location() {
             <div className="getLocation">
                 {!isFirstRef && !isAvailable && <ErrorText />}
                 {isAvailable && shops && (
-                    <div className="shopList">
+                    <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'spaceBetween'
+                    }}>
                         {shops.map((shop) =>
                             <ShopList shop={shop} />
                         )}
