@@ -1,38 +1,41 @@
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
+
+
 
 export default function ShopList(props) {
+
     return (
         <Card sx={{
             display: 'flex',
-            width: '47%',
-            height: '220px',
-            border: '1px solid orange',
+            alignItems: 'center',
+            width: '45%',
+            height: 'auto',
+            border: '3px solid orange',
             margin: '15px',
+            padding: '10px'
         }}>
-            <CardActionArea sx={{
-                display: 'flex',
-                justifyContent: 'flex-start'
-            }}>
-                <CardMedia
-                    sx={{
-                        width: "200px",
-                        padding: "10px"
-                    }}
-                    component="img"
-                    image={props.shop.photo.pc.l}
-                    alt="shopPhoto"
-                />
-                <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Link to="/">
+            <Link to={"/shopinfo/" + props.shop.id}>
+                <CardActionArea sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-start'
+                }}>
+                    <CardMedia
+                        sx={{
+                            width: "200px",
+                            padding: "10px"
+                        }}
+                        component="img"
+                        image={props.shop.photo.pc.l}
+                        alt="shopPhoto"
+                    />
+                    <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                         <CardContent sx={{ flex: '1 0 auto' }}>
                             <Typography gutterBottom variant="h5" component="div">
                                 {props.shop.name}
@@ -49,9 +52,9 @@ export default function ShopList(props) {
                                 デイナー予算：{props.shop.budget.average}
                             </Typography>
                         </CardContent>
-                    </Link>
-                </Box>
-            </CardActionArea>
+                    </Box>
+                </CardActionArea>
+            </Link>
         </Card>
     );
 }
