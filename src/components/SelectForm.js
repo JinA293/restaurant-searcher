@@ -22,13 +22,15 @@ export default function SelectForm(props) {
     }
 
     return (
-        <Box sx={{ maxWidth: '100px' }}>
-            <FormControl fullWidth>
+        <Box sx={{ maxWidth: '100px', display: 'flex'}}>
+            <FormControl >
                 <Select
                     labelId="range-label"
                     id="range-select"
                     value={value}
                     onChange={handleChange}
+                    sx={{width: 'fit-content',
+                        margin: '10px'}}
                 >
                     <MenuItem value={1}>300m</MenuItem>
                     <MenuItem value={2}>500m</MenuItem>
@@ -37,7 +39,7 @@ export default function SelectForm(props) {
                     <MenuItem value={5}>3km</MenuItem>
                 </Select>
             </FormControl>
-            <IconButton type="button" sx={{ p: '10px' }} aria-label="search" onClick={handleClick}>
+            <IconButton type="button" aria-label="search" onClick={handleClick}>
                 <SearchIcon />
             </IconButton>
         </Box>

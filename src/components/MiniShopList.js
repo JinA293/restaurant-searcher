@@ -6,7 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import "../App.css";
 
 export default function MiniShopList(props) {
     return (

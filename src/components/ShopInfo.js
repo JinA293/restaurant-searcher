@@ -8,6 +8,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import MiniShopList from './MiniShopList';
+import "../App.css";
+
 
 export default function ShopInfo() {
     const { id } = useParams();
@@ -104,8 +106,8 @@ export default function ShopInfo() {
                             住所：{shop.address}
                         </Typography>
                         <div style={{ display: 'flex' }}>
-                            <Button onClick={goGourmet} variant="contained" sx={{ m: "5px", mt: "30px", width: "50%", height: "75px" }}>ホットペッパーグルメで見る</Button>
-                            <Button onClick={goGoogle} variant="contained" sx={{ m: "5px", mt: "30px", width: "50%", height: "75px" }}>GoogleMapで場所を確認する</Button>
+                            <Button onClick={goGourmet} variant="contained" color= 'warning' sx={{ m: "5px", mt: "30px", width: "50%", height: "75px", fontSize: '15px'}}>ホットペッパーグルメで見る</Button>
+                            <Button onClick={goGoogle} variant="contained" sx={{ m: "5px", mt: "30px", width: "50%", height: "75px", fontSize: '15px'}}>GoogleMapで場所を確認する</Button>
                         </div>
                     </CardContent>
                 </Box>
